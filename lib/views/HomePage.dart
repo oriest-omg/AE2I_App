@@ -1,9 +1,13 @@
-import 'package:ae2i_app/widgets/BureauWidget.dart';
-import 'package:ae2i_app/widgets/ElectionWidGet.dart';
-import 'package:ae2i_app/widgets/ParrainageWidget.dart';
-import 'package:ae2i_app/widgets/QrCodeWidget.dart';
+import 'package:ae2i_app/controller/UserController.dart';
+import 'package:ae2i_app/widgets/Bureau/BureauWidget.dart';
+import 'package:ae2i_app/widgets/Election/ElectionWidGet.dart';
+import 'package:ae2i_app/widgets/Home/HomeWidget.dart';
+import 'package:ae2i_app/widgets/Parrainage/ParrainageWidget.dart';
+import 'package:ae2i_app/widgets/QR_Code/QrCodeWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:badges/badges.dart';
@@ -20,8 +24,7 @@ class _HomePageState extends State<HomePage> {
   List models = [];
   String categorie = '';
   late String api = 'http://10.0.2.2:8000/api/';
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   bool co = true;
   late String statut = "connecte";
@@ -29,12 +32,11 @@ class _HomePageState extends State<HomePage> {
 
   List widOption() {
     return <Widget>[
-      Text('nothing'),
-      ParrainageWidget(),
-      BureauWidget(),
-      QrCodeWidget(),
-      ElectionWidget()
-// Connexion()
+      const HomeWidget(),
+      const ParrainageWidget(),
+      const BureauWidget(),
+      const QrCodeWidget(),
+      const ElectionWidget()
     ];
   }
 
@@ -61,59 +63,34 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  BottomNavigationBarItem item(String data,IconData icon){
+    return BottomNavigationBarItem(
+      icon: Icon(
+        icon,
+        color: Colors.black,
+      ),
+      label: data,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text('Ae2IApp'),
           actions: [
-            IconButton(onPressed: ()=>{}, icon: Icon(Icons.account_circle)),
-            IconButton(onPressed: ()=>{}, icon: Icon(Icons.settings))
+            IconButton(onPressed: ()=>{}, icon: const Icon(Icons.account_circle)),
+            IconButton(onPressed: ()=>{}, icon: const Icon(Icons.settings))
           ],
         ),
         body: widOption().elementAt(_selectedIndex),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.red,
           items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Colors.black,
-              ),
-                label: 'Accueil',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.shopping_bag,
-                color: Colors.black,
-              ),
-              label: 'Parrainage',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.favorite,
-                color: Colors.black,
-              ),
-              label: 'Bureau',
-            ),
-            BottomNavigationBarItem(
-              icon: Badge(
-                badgeContent: Text('0'),
-                badgeColor: Colors.orange,
-                child: Icon(
-                  Icons.shopping_cart,
-                  color: Colors.black,
-                ),
-              ),
-              label: 'QRCODE',
-            ),
-            BottomNavigationBarItem(
-              icon:  Icon(
-                  Icons.shopping_cart,
-                  color: Colors.black,
-                ),
-              label: 'Election',
-            ),
+            item('Accueil',Icons.home),
+            item('Parrainage',Icons.shopping_bag),
+            item('Bureau',Icons.favorite),
+            item('Election', Icons.monetization_on),
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.black,

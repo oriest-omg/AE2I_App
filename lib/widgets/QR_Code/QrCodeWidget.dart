@@ -14,7 +14,7 @@ class QrCodeWidget extends StatelessWidget {
           "nom":"Djelloh",
           "prenom":"Oriest",
           "classe" : "Master1",
-          "nemro de telephone": "0749126278"
+          "numero de telephone": "0749126278"
           "statut cotisation": "ok",
           
         }

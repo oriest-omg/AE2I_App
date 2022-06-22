@@ -39,6 +39,7 @@ dependencies:
   shared_preferences: ^2.0.7
   badges: ^2.0.2
   qr_flutter: ^4.0.0
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +66,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/logo-AE2I.png
+    - images/bohiri.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
