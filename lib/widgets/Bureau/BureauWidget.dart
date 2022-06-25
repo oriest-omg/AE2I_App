@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class BureauWidget extends StatelessWidget {
   const BureauWidget({Key? key}) : super(key: key);
@@ -21,64 +23,70 @@ class BureauWidget extends StatelessWidget {
               itemCount: 5,
               itemBuilder: (context, index) {
                 String picture = membersPicture[index];
+                int id = items[index];
                 return  Padding(
                   padding: const EdgeInsets.only(bottom: 18.0,left:20,right: 20),
-                  child: Container(
-                    height: 300.0,
-                    // color: Colors.transparent,
+                  child: GestureDetector(
+                    onTap: (){
+                      Get.toNamed('/details_bureau/$id');
+                    },
                     child: Container(
-                        decoration:  BoxDecoration(
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.white,
-                              blurRadius: 35.0, // soften the shadow
-                              spreadRadius: 15.0, //extend the shadow
-                              offset: Offset(
-                                15.0, // Move to right 10  horizontally
-                                30.0, // Move to bottom 10 Vertically
-                              ),
-                            )
-                          ],
-                            color: Colors.green,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(40.0),
-                              topRight: Radius.circular(40.0),
-                              bottomRight: Radius.circular(40.0),
-                              bottomLeft: Radius.circular(40.0)
-                            ),
-                            image: DecorationImage(
-                              image: AssetImage(picture),
-                              fit: BoxFit.fill,
-                            ),
-
-                        ),
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            boxShadow: [
+                      height: 300.0,
+                      // color: Colors.transparent,
+                      child: Container(
+                          decoration:  BoxDecoration(
+                            boxShadow: const [
                               BoxShadow(
-                                color: Colors.black38,
-                                blurRadius: 25.0, // soften the shadow
-                                spreadRadius: 5.0, //extend the shadow
+                                color: Colors.white,
+                                blurRadius: 35.0, // soften the shadow
+                                spreadRadius: 15.0, //extend the shadow
                                 offset: Offset(
                                   15.0, // Move to right 10  horizontally
-                                  15.0, // Move to bottom 10 Vertically
+                                  30.0, // Move to bottom 10 Vertically
                                 ),
                               )
                             ],
-                          ),
-                          child: Stack(
-                            children: const [
-                              Positioned(
-                                left: 160,
-                                bottom: 40,
-                                child: Text('Le président',style: TextStyle(
-                                    color: Colors.white,
-                                  fontSize: 30
-                                ),),
+                              color: Colors.green,
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(40.0),
+                                topRight: Radius.circular(40.0),
+                                bottomRight: Radius.circular(40.0),
+                                bottomLeft: Radius.circular(40.0)
                               ),
-                            ]
+                              image: DecorationImage(
+                                image: AssetImage(picture),
+                                fit: BoxFit.fill,
+                              ),
+
                           ),
-                        )
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black38,
+                                  blurRadius: 25.0, // soften the shadow
+                                  spreadRadius: 5.0, //extend the shadow
+                                  offset: Offset(
+                                    15.0, // Move to right 10  horizontally
+                                    15.0, // Move to bottom 10 Vertically
+                                  ),
+                                )
+                              ],
+                            ),
+                            child: Stack(
+                              children: const [
+                                Positioned(
+                                  left: 160,
+                                  bottom: 40,
+                                  child: Text('Le président',style: TextStyle(
+                                      color: Colors.white,
+                                    fontSize: 30
+                                  ),),
+                                ),
+                              ]
+                            ),
+                          )
+                      ),
                     ),
                   ),
                 );
@@ -91,7 +99,7 @@ class BureauWidget extends StatelessWidget {
   }
   static List getDummyList() {
     List list = List.generate(10, (i) {
-      return "Item ${i + 1}";
+      return i+ 1;
     });
     return list;
   }

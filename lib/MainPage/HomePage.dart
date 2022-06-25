@@ -2,6 +2,7 @@ import 'package:ae2i_app/controller/UserController.dart';
 import 'package:ae2i_app/widgets/Bureau/BureauWidget.dart';
 import 'package:ae2i_app/widgets/Election/ElectionWidGet.dart';
 import 'package:ae2i_app/widgets/Home/HomeWidget.dart';
+import 'package:ae2i_app/widgets/Money/MoneyWidget.dart';
 import 'package:ae2i_app/widgets/Parrainage/ParrainageWidget.dart';
 import 'package:ae2i_app/widgets/QR_Code/QrCodeWidget.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,6 +12,9 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:badges/badges.dart';
+
+import '../widgets/Account/AccountWidget.dart';
+import '../widgets/Settings/SettingsWidget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -35,8 +39,10 @@ class _HomePageState extends State<HomePage> {
       const HomeWidget(),
       const ParrainageWidget(),
       const BureauWidget(),
-      const QrCodeWidget(),
-      const ElectionWidget()
+      // const QrCodeWidget(),
+      const MoneyWidget(),
+      const ElectionWidget(),
+
     ];
   }
 
@@ -77,10 +83,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Ae2IApp'),
+          title: const Text('Ae2IApp'),
           actions: [
-            IconButton(onPressed: ()=>{}, icon: const Icon(Icons.account_circle)),
-            IconButton(onPressed: ()=>{}, icon: const Icon(Icons.settings))
+            IconButton(onPressed: ()=>{
+              Get.to(const AccountWidget())
+            }, icon: const Icon(Icons.account_circle)),
+            IconButton(onPressed: ()=>{
+              Get.to(const SettingsWidget())
+            }, icon: const Icon(Icons.settings))
           ],
         ),
         body: widOption().elementAt(_selectedIndex),
@@ -90,7 +100,8 @@ class _HomePageState extends State<HomePage> {
             item('Accueil',Icons.home),
             item('Parrainage',Icons.shopping_bag),
             item('Bureau',Icons.favorite),
-            item('Election', Icons.monetization_on),
+            item('Cotisation', Icons.monetization_on),
+            item('Election', Icons.how_to_vote_rounded),
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.black,
